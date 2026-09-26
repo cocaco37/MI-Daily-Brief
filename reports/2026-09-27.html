@@ -1,0 +1,285 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MI Daily Brief</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#13222C; --ink-2:#4A5A66; --ink-3:#7A8894;
+  --line:#D9E0E5; --accent:#1B5C85; --accent-soft:#E3EEF5;
+  --up:#B42318; --down:#1D6FB8; --flat:#5E6B75;
+  --tag-ok-bg:#E4F2EA; --tag-ok:#1E6B45;
+  --tag-ev-bg:#E6EEF8; --tag-ev:#1D4F8A;
+  --tag-hold-bg:#F1EFEA; --tag-hold:#6B5D3F;
+  --warn-bg:#FFF4E5; --warn:#8A4B08;
+  --kakao:#FEE500; --kakao-ink:#191600;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+    --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+    --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+    --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+    --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+    --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+    --warn-bg:#2E2213; --warn:#F0B56A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+  --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+  --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+  --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+  --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+  --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+  --warn-bg:#2E2213; --warn:#F0B56A;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 56px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.head{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:18px}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;letter-spacing:.06em;color:var(--ink-2);font-weight:500}
+.sample{background:var(--warn-bg);color:var(--warn);padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.02em}
+h1{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font-size:13px;color:var(--ink-2)}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:14px}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sec-title h2{font-size:17px;font-weight:700}
+.sec-title span{font-size:12px;color:var(--ink-3)}
+
+/* kakao */
+.kakao{display:flex;flex-direction:column;gap:8px}
+.bubble{background:var(--kakao);color:var(--kakao-ink);border-radius:4px 14px 14px 14px;padding:12px 14px;max-width:340px;font-size:13.5px;line-height:1.6;white-space:pre-line}
+.bubble b{font-weight:700}
+.note{font-size:12.5px;color:var(--ink-3)}
+
+/* table */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;background:var(--accent-soft)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+.idx-note{font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:13.5px}
+.alert b{font-weight:700}
+
+/* items */
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.item-head{display:flex;flex-direction:column;gap:6px}
+.cat{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+.item h3{font-size:16.5px;font-weight:700}
+.rows{display:grid;grid-template-columns:88px 1fr;gap:10px 14px;margin:0}
+.rows dt{font-size:12.5px;font-weight:600;color:var(--ink-3);padding-top:2px}
+.rows dd{margin:0;font-size:14.5px}
+.rows ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.src{font-size:13px;color:var(--ink-2)}
+.src a{word-break:break-word}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:3px;margin-right:6px;letter-spacing:.02em;vertical-align:1px}
+.t-ok{background:var(--tag-ok-bg);color:var(--tag-ok)}
+.t-ev{background:var(--tag-ev-bg);color:var(--tag-ev)}
+.t-hold{background:var(--tag-hold-bg);color:var(--tag-hold)}
+.t-single{background:var(--warn-bg);color:var(--warn)}
+.t-rep{background:var(--line);color:var(--ink-2)}
+
+/* watch / schedule / excluded */
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.plain ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sched{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin:0}
+.sched dt{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500;white-space:nowrap}
+.sched dd{margin:0}
+.excl li{color:var(--ink-2)}
+.excl b{color:var(--ink)}
+
+.legend{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
+.sources ol{margin:0;padding-left:20px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+.sources a{word-break:break-all}
+
+@media (max-width:520px){
+  h1{font-size:23px}
+  .rows{grid-template-columns:1fr;gap:2px}
+  .rows dd{margin-bottom:8px}
+}
+/* transmission chain */
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.chain li{position:relative;padding:0 0 10px 22px;font-size:14px}
+.chain li::before{content:"";position:absolute;left:5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.chain li::after{content:"";position:absolute;left:8.5px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+.chain li:last-child{padding-bottom:0}
+.chain li:last-child::after{display:none}
+.chain li.ok::before{background:var(--tag-ok)}
+.chain li.open::before{background:transparent;border:1.5px solid var(--ink-3)}
+.chain .st{font-size:11.5px;font-weight:600;margin-left:6px;color:var(--ink-3)}
+.chain li.ok .st{color:var(--tag-ok)}
+.time{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.summary ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.baseline{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:4px;padding:8px 12px}
+</style>
+</head><body>
+<div class="wrap">
+<header class="head">
+  <div class="eyebrow"><span>LX판토스 해운MI팀 · MI Daily Brief</span></div>
+  <h1>9/27 (일) 아침 브리핑</h1>
+  <dl class="meta">
+    <dt>대상 기간</dt><dd class="num">9/26 (토) 07:00 ~ 9/27 (일) 07:00</dd>
+    <dt>반영 시점</dt><dd>9/27 (일) 07:00까지 발표·보도된 소식 반영</dd>
+    <dt>시각 기준</dt><dd>모두 한국시간(KST)</dd>
+  </dl>
+</header>
+
+<section aria-labelledby="s-sum">
+  <div class="sec-title"><h2 id="s-sum">한눈에 보기</h2></div>
+  <div class="summary"><ol>
+    <li><b>호르무즈 '7일 내 재개안', 트럼프가 거부.</b> 이란이 미국에 전달한 안을 트럼프 대통령이 직접 거부함. 중동(걸프)향 서비스 정상화 시점이 앞당겨질 근거가 없어짐.</li>
+    <li><b>미·중, 양방향 각 300억 달러 관세 우대 권고에 합의.</b> 중국발 미국 수입 소비재(가전·완구 등) 포함. 세율·발효일이 없어 태평양(미주) 항로 물동량 영향은 판단 유보.</li>
+    <li><b>태풍 26호, 29일 무렵 난세이제도(오키나와·아마미) 접근.</b> 9/27~30 고파 경계. 이후 경로가 확정되지 않아 일본 주요 항만 기항 영향은 판단 유보.</li>
+  </ol></div>
+</section>
+
+<section aria-labelledby="s-items">
+  <div class="sec-title"><h2 id="s-items">주요 업데이트</h2><span>3건 · 중요도순</span></div>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">지정학 · 호르무즈</span>
+      <h3>트럼프, 이란의 '7일 내 호르무즈 재개안' 공개 거부</h3>
+      <span class="time">9/27 (일) 00:12 보도 · 백악관 출발 때 발언</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul>
+        <li>트럼프 대통령이 9/26(토) 오전(미 동부) 백악관 출발 때 "I'm rejecting their deal"이라고 발언함(CBS 9/27 00:12 게재).</li>
+        <li>거부 발언 이후 이란 외무부의 공식 대응은 07:00까지 확인하지 못함.</li>
+      </ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain">
+        <li class="ok">7일 내 재개안 거부<span class="st">확인</span></li>
+        <li class="open">미·이란 재개 합의<span class="st">대안 미제시</span></li>
+        <li class="open">해협 통항 정상화, 전쟁보험료 하락<span class="st">대기</span></li>
+        <li class="open">선사의 중동(걸프) 직기항 재개<span class="st">대기</span></li>
+      </ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-ok">확인</span>이란이 공식 전달한 재개안을 트럼프 대통령이 직접 거부해, 중동(걸프)향 서비스 정상화 시점이 앞당겨질 근거가 없어짐.</dd>
+      <dt>배경</dt>
+      <dd class="baseline">9/25(금) 아락치 이란 외무장관이 7일 내 재개안을 미국에 전달했다고 밝힘. 조건은 미국의 이란 항만 해상 봉쇄 해제, 원유 제재 해제, 동결 자산 해제 등이며, 전달 경로(카타르 중재 등)와 조건 구성은 보도마다 차이가 있음 <span class="tag t-rep">보도 기준</span>.</dd>
+      <dt>다음 확인</dt>
+      <dd>이란 외무부의 공식 대응, 중재 후속 일정, 선사의 중동(걸프)향 서비스 공지</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-7-day-proposal/" target="_blank" rel="noopener">CBS 라이브 (9/26 11:12 EDT)</a> · <a href="https://www.nbcnews.com/world/iran/iran-says-choice-reopening-hormuz-rests-united-states-offer-rcna599956" target="_blank" rel="noopener">NBC (9/26 12:10 EDT 갱신)</a> · <a href="https://www.aljazeera.com/news/2026/9/26/trump-rejects-irans-seven-day-roadmap-to-reopen-strait-of-hormuz" target="_blank" rel="noopener">Al Jazeera (9/26)</a> · <a href="https://gcaptain.com/trump-rejects-iran-proposal-on-hormuz-as-houthis-target-riyadh/" target="_blank" rel="noopener">gCaptain/Bloomberg (9/26)</a></dd>
+    </dl>
+  </article>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">통상 · 미·중</span>
+      <h3>미·중, 양방향 각 300억 달러 관세 우대 권고에 합의</h3>
+      <span class="time">9/26 (토) 12:29 백악관 팩트시트 · 17:38 중국 발표 보도</span>
+    </div>
+    <dl class="rows">
+      <dt>사실</dt>
+      <dd><ul>
+        <li>백악관: 미·중 무역위원회(Board of Trade)에서 "비민감 품목 양방향 각 300억 달러에 대한 관세 우대 권고"에 합의함. 확정된 관세 변경이 아니라 권고임.</li>
+        <li>미국 수입 측 대상: 소형 가전, 완구, 명절 장식, 아동용 카시트 등 소비재. 미국 수출 측: 농산물, 수산물, 원목·목재, 화장품, 의료기기.</li>
+        <li>세율, 전체 품목 목록, 발효일은 미발표.</li>
+        <li>백악관 팩트시트에 "어떤 국가·기관도 국제 수로에 통행료를 부과하도록 허용될 수 없다"는 문구가 명시됨. 중국 측도 같은 취지를 밝힘 <span class="tag t-rep">중국 측 보도 기준</span>.</li>
+      </ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain">
+        <li class="ok">관세 우대 권고 합의<span class="st">확인</span></li>
+        <li class="open">세율·품목·발효일 확정<span class="st">미발표</span></li>
+        <li class="open">대상 소비재 수입 원가<span class="st">미확정</span></li>
+        <li class="open">태평양(미주) 항로 물동량<span class="st">판단 유보</span></li>
+      </ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">판단 유보</span>우대 대상에 컨테이너 화물인 소비재가 들어갔으나, 세율과 발효일이 없어 태평양(미주) 항로 물동량 영향은 아직 판단할 수 없음.</dd>
+      <dt>배경</dt>
+      <dd class="baseline">9/25(금, 미국 시각) 그리어 USTR(미 무역대표부) 대표가 CNBC 인터뷰에서 월요일에 세부 내용을 더 내놓을 것 같다고 말함(Reuters 보도).</dd>
+      <dt>다음 확인</dt>
+      <dd><b>9/28(월, 미국 시각)</b> 미국 측 세부 발표 여부: 품목 목록, 세율, 발효일, 무역법 301조 항만수수료(USTR의 중국 관련 선박 대상) 유예 관련 언급 여부</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://www.whitehouse.gov/fact-sheets/2026/09/fact-sheet-president-donald-j-trump-advances-a-fair-and-reciprocal-relationship-with-china-while-hosting-historic-state-visit/" target="_blank" rel="noopener">백악관 팩트시트</a> · <a href="https://www.foxnews.com/politics/us-china-strike-deal-lower-tariffs-30b-goods-trump-xi-washington-summit" target="_blank" rel="noopener">Fox News (9/26 11:41 EDT)</a> · <a href="https://wtaq.com/2026/09/26/china-us-agree-to-30-billion-tariff-cut-ai-dialogue-during-xi-visit/" target="_blank" rel="noopener">Reuters via WTAQ (9/26 08:38 UTC)</a> · <a href="https://www.cp24.com/news/world/2026/09/26/china-us-agree-to-us30b-tariff-cut-ai-dialog-during-xi-visit-beijing-says/" target="_blank" rel="noopener">CP24/Reuters</a> · <a href="https://wmbdradio.com/2026/09/25/details-on-us-china-trade-talks-to-come-on-monday-says-greer/" target="_blank" rel="noopener">Reuters via WMBD (배경)</a></dd>
+    </dl>
+  </article>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">기상 · 동아시아</span>
+      <h3>태풍 26호, 29일 무렵 강한 세력으로 난세이제도 접근</h3>
+      <span class="time">9/26 (토) 16:31 · 일본 기상청 발표</span>
+    </div>
+    <dl class="rows">
+      <dt>사실</dt>
+      <dd><ul>
+        <li>일본 기상청: 오키나와 남쪽에서 북북서진 중. 발달하며 북상한 뒤 점차 북동쪽으로 진로를 바꿔, 29일 무렵까지 "강한" 세력으로 난세이제도(오키나와·아마미)에 접근할 전망.</li>
+        <li>기상청 파고 예보: 오키나와 27일 6m, 28일 7m, 아마미 28일 5m. 난세이제도는 27일부터 30일 무렵까지 너울을 동반한 고파 경계.</li>
+        <li>일본기상협회(tenki.jp): 움직임이 느려 오키나와 영향이 길어질 우려. 이후 혼슈 남쪽을 지나는 예보가 많다고 설명함.</li>
+      </ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain">
+        <li class="ok">난세이 해역 고파 예보<span class="st">확인</span></li>
+        <li class="open">혼슈 남쪽 통과 경로 확정<span class="st">예보 단계</span></li>
+        <li class="open">일본 항만 운영 제한, 기항 일정 지연<span class="st">판단 유보</span></li>
+      </ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">판단 유보</span>오키나와 해역 고파는 예보로 확인되나, 이후 경로가 확정되지 않아 일본 주요 항만 기항 일정 영향은 아직 판단할 수 없음.</dd>
+      <dt>다음 확인</dt>
+      <dd>기상청 진로 예보 갱신, 일본 주요 항만 운영 공지</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://www.okinawatimes.co.jp/articles/-/1931840" target="_blank" rel="noopener">오키나와타임스 (기상청 9/26 16:31 발표)</a> · <a href="https://tenki.jp/forecaster/t_yoshida/2026/09/26/40754.html" target="_blank" rel="noopener">tenki.jp (9/26 12:03)</a></dd>
+    </dl>
+  </article>
+</section>
+
+<section aria-labelledby="s-none">
+  <div class="sec-title"><h2 id="s-none">새로운 소식이 없던 분야</h2></div>
+  <div class="plain"><ul>
+    <li>선사 공지: 네트워크·얼라이언스 개편, 서비스 개설·중단, 할증료 신설·변경</li>
+    <li>홍해·바브엘만데브: 상선 공격 보고 확인 안 됨. 사우디 주도 연합군이 9/26(토, 현지) 리야드·카미스 무샤이트를 향한 후티 드론·탄도미사일 요격을 발표함. 정확한 시각 미확인 <span class="tag t-rep">보도 기준</span></li>
+    <li>항만 노사, 해운 규제(USTR 미 무역대표부·FMC 미 연방해사위원회·IMO 국제해사기구·EU ETS 배출권거래제), 대만해협·한반도</li>
+    <li>대형 해난, 사이버 공격·시스템 장애, 주요 경제지표 (주말)</li>
+  </ul></div>
+</section>
+
+<section aria-labelledby="s-sched">
+  <div class="sec-title"><h2 id="s-sched">이번 주 일정</h2></div>
+  <div class="plain">
+    <dl class="sched">
+      <dt>9/28 (월)</dt><dd>미국 측 미·중 합의 세부 발표 가능 (그리어 대표 발언, 미국 시각)</dd>
+      <dt>9/29 (화)</dt><dd>태풍 26호 난세이제도 접근 예보</dd>
+      <dt>10/1 (목)</dt><dd>Maersk 미국·캐나다 수출 화물 항만보안료(Port Security Service Export) 부과 시작 (컨테이너당 미국발 USD 15, 캐나다발 USD 12) · <a href="https://www.maersk.com/news/articles/2026/08/17/port-security-surcharge-us-canada-exports-october" target="_blank" rel="noopener">Maersk 공지</a></dd>
+      <dt>10/1 (목)</dt><dd>ver.di(독일 통합서비스노조) 6개 항만 임금협상 사측안 조합원 설문(파업 찬반투표 규정 적용) 마감 (독일 시각 저녁) · <a href="https://hamburg.verdi.de/presse/pressemitteilungen/++co++860f7cae-b0eb-11f1-962a-d1832b7933b6" target="_blank" rel="noopener">ver.di 발표</a></dd>
+    </dl>
+  </div>
+</section>
+
+<section aria-labelledby="s-legend">
+  <div class="sec-title"><h2 id="s-legend">읽는 법</h2></div>
+  <div class="legend">
+    <span><span class="tag t-ok">확인</span>이미 실행됐거나 일정·수치로 확정된 사실에 근거한 판단</span>
+    <span><span class="tag t-ev">근거</span>인용할 수 있는 발언, 지표, 기관 분석에 근거한 판단</span>
+    <span><span class="tag t-hold">판단 유보</span>영향이 갈 수 있는 경로는 있으나 판단할 근거가 아직 없음</span>
+    <span><span class="tag t-rep">보도 기준</span>공식 원문을 확인하지 못해 언론 보도에 의존하는 정보</span>
+    <span>영향 경로: ● 확인된 단계 · ○ 아직 확인되지 않은 단계</span>
+    <span>배경: 대상 기간 이전의 정보. 해석을 돕기 위해서만 적음</span>
+  </div>
+</section>
+</div>
+</body></html>

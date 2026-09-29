@@ -1,0 +1,281 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MI Daily Brief</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#13222C; --ink-2:#4A5A66; --ink-3:#7A8894;
+  --line:#D9E0E5; --accent:#1B5C85; --accent-soft:#E3EEF5;
+  --up:#B42318; --down:#1D6FB8; --flat:#5E6B75;
+  --tag-ok-bg:#E4F2EA; --tag-ok:#1E6B45;
+  --tag-ev-bg:#E6EEF8; --tag-ev:#1D4F8A;
+  --tag-hold-bg:#F1EFEA; --tag-hold:#6B5D3F;
+  --warn-bg:#FFF4E5; --warn:#8A4B08;
+  --kakao:#FEE500; --kakao-ink:#191600;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+    --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+    --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+    --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+    --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+    --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+    --warn-bg:#2E2213; --warn:#F0B56A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+  --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+  --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+  --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+  --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+  --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+  --warn-bg:#2E2213; --warn:#F0B56A;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 56px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.head{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:18px}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;letter-spacing:.06em;color:var(--ink-2);font-weight:500}
+.sample{background:var(--warn-bg);color:var(--warn);padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.02em}
+h1{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font-size:13px;color:var(--ink-2)}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:14px}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sec-title h2{font-size:17px;font-weight:700}
+.sec-title span{font-size:12px;color:var(--ink-3)}
+
+/* kakao */
+.kakao{display:flex;flex-direction:column;gap:8px}
+.bubble{background:var(--kakao);color:var(--kakao-ink);border-radius:4px 14px 14px 14px;padding:12px 14px;max-width:340px;font-size:13.5px;line-height:1.6;white-space:pre-line}
+.bubble b{font-weight:700}
+.note{font-size:12.5px;color:var(--ink-3)}
+
+/* table */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;background:var(--accent-soft)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+.idx-note{font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:13.5px}
+.alert b{font-weight:700}
+
+/* items */
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.item-head{display:flex;flex-direction:column;gap:6px}
+.cat{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+.item h3{font-size:16.5px;font-weight:700}
+.rows{display:grid;grid-template-columns:88px 1fr;gap:10px 14px;margin:0}
+.rows dt{font-size:12.5px;font-weight:600;color:var(--ink-3);padding-top:2px}
+.rows dd{margin:0;font-size:14.5px}
+.rows ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.src{font-size:13px;color:var(--ink-2)}
+.src a{word-break:break-word}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:3px;margin-right:6px;letter-spacing:.02em;vertical-align:1px}
+.t-ok{background:var(--tag-ok-bg);color:var(--tag-ok)}
+.t-ev{background:var(--tag-ev-bg);color:var(--tag-ev)}
+.t-hold{background:var(--tag-hold-bg);color:var(--tag-hold)}
+.t-single{background:var(--warn-bg);color:var(--warn)}
+.t-rep{background:var(--line);color:var(--ink-2)}
+
+/* watch / schedule / excluded */
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.plain ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sched{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin:0}
+.sched dt{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500;white-space:nowrap}
+.sched dd{margin:0}
+.excl li{color:var(--ink-2)}
+.excl b{color:var(--ink)}
+
+.legend{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
+.sources ol{margin:0;padding-left:20px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+.sources a{word-break:break-all}
+
+@media (max-width:520px){
+  h1{font-size:23px}
+  .rows{grid-template-columns:1fr;gap:2px}
+  .rows dd{margin-bottom:8px}
+}
+/* transmission chain */
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.chain li{position:relative;padding:0 0 10px 22px;font-size:14px}
+.chain li::before{content:"";position:absolute;left:5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.chain li::after{content:"";position:absolute;left:8.5px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+.chain li:last-child{padding-bottom:0}
+.chain li:last-child::after{display:none}
+.chain li.ok::before{background:var(--tag-ok)}
+.chain li.open::before{background:transparent;border:1.5px solid var(--ink-3)}
+.chain .st{font-size:11.5px;font-weight:600;margin-left:6px;color:var(--ink-3)}
+.chain li.ok .st{color:var(--tag-ok)}
+.time{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.summary ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px}
+.summary li{color:var(--ink-2);font-size:14px}
+.summary li b{display:block;color:var(--ink);font-size:15px;margin-bottom:3px}
+.baseline{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:4px;padding:8px 12px}
+</style>
+</head><body>
+<div class="wrap">
+<header class="head">
+  <div class="eyebrow"><span>LX판토스 해운MI팀 · MI Daily Brief</span></div>
+  <h1>MI Daily Brief · 9/30 (수)</h1>
+  <dl class="meta">
+    <dt>대상 기간</dt><dd class="num">9/29 (화) 07:00 ~ 9/30 (수) 07:00 (24시간)</dd>
+    <dt>반영 시점</dt><dd>9/30 (수) 07:00까지 발표·보도된 소식 반영</dd>
+    <dt>시각 기준</dt><dd>한국시간(KST). 발언 시각이 확인되지 않은 해외 일정은 현지 날짜를 병기</dd>
+  </dl>
+</header>
+
+<section aria-labelledby="s-sum">
+  <div class="sec-title"><h2 id="s-sum">한눈에 보기</h2></div>
+  <div class="summary"><ol>
+    <li><b>이스라엘 정부기업청, Hapag-Lloyd의 ZIM 인수 원안 처리 종료·수정안 정식 재신청 요구</b> Hapag-Lloyd는 9/29 재무부 입장이 지난주 개선안을 반영하지 않았다며 재검토를 요청했고, 정부기업청이 든 사유는 구속력 있는 문서 대신 원칙 목록만 제출된 점임(보도).</li>
+    <li><b>MSC, 극동발 북유럽 FAK 40ft USD 4,500 공지(10/19~31, 한국 포함)</b> 북유럽 20ft는 USD 3,150, 서지중해는 20ft USD 3,750·40ft USD 4,500, 동지중해는 USD 3,800·4,800임(Container News 보도).</li>
+    <li><b>MSC, 유럽발 UAE·어퍼걸프향 RCR 할증료 신설(드라이 USD 1,000, 10/1 부킹분부터)</b> 냉동 컨테이너는 USD 2,000이며, MSC가 든 사유는 해당 항로의 '수요 증가 지속'임(Container News 보도, MSC 원문 미확인).</li>
+  </ol></div>
+</section>
+
+<section aria-labelledby="s-items">
+  <div class="sec-title"><h2 id="s-items">주요 업데이트</h2><span>4건 · 중요도순</span></div>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">선사 · M&A</span>
+      <h3>이스라엘 정부기업청, Hapag-Lloyd의 ZIM 인수 원안 처리 종료·수정안 정식 재신청 요구</h3>
+      <span class="time">9/29 (화) Hapag-Lloyd 재검토 요청 → 9/29 저녁(이스라엘 현지) 정부기업청 통보, 9/30 04:58 ynet 보도</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul><li>9/29 Hapag-Lloyd: 이스라엘 재무부 입장이 지난주 제시한 개선안을 반영하지 않았다며 재검토를 요청하고, 수정안 세부는 45일 안에 확정하며 연내 종결을 목표로 한다고 밝힘(Reuters) <span class="tag t-rep">보도 기준</span>.</li><li>9/29 저녁(이스라엘 현지) 정부기업청: ZIM에 "ZIM 거래와 관련한 모든 요청의 처리를 종료한다"고 통보함. 구속력 있는 문서 대신 원칙 목록만 제출됐다는 점을 들었음(ynet·Calcalist) <span class="tag t-rep">보도 기준</span>.</li><li>수정안은 ZIM·Hapag-Lloyd·FIMI 이사회 승인을 받은 정식 신청이 새로 필요하다고 보도됨(ynet·Calcalist) <span class="tag t-rep">보도 기준</span>.</li></ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain"><li class="ok">정부기업청, 원안 심사 종료 통보(보도)<span class="st">확인</span></li><li class="open">양사 수정안 전면 재신청 여부·시점<span class="st">미확인</span></li><li class="open">이스라엘 정부 승인<span class="st">미확인</span></li><li class="open">ZIM 선대의 Hapag-Lloyd 편입(선사 구도 변화)<span class="st">미확인</span></li></ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>ZIM 선대의 Hapag-Lloyd 편입 시점은 불투명한 상태임: 수정안은 ZIM·Hapag-Lloyd·FIMI 이사회 승인을 받은 정식 신청이 새로 필요하다고 보도됨.</dd>
+      <dt>배경</dt>
+      <dd class="baseline">이스라엘 재무부는 9/28(이스라엘 현지) 거래 위험이 이익보다 크다며 현 구조로는 승인하지 말아야 한다는 입장을 냈고, Hapag-Lloyd 지분 가운데 카타르 12.3%·사우디 10.2%를 문제로 들었음(보도). Hapag-Lloyd는 9/24 수정안의 골자를 이스라엘 당국에 제출했고, 9/28(독일 현지) 2026년 EBITDA 전망을 39억~44억 달러로 올렸음(Reuters).</dd>
+      <dt>다음 확인</dt>
+      <dd>Hapag-Lloyd·ZIM 공식 발표와 재신청 여부, 이스라엘 정부 결정</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://gcaptain.com/hapag-lloyd-urges-israel-to-review-improved-offer-for-shipping-services-company-zim/" target="_blank" rel="noopener">gCaptain/Reuters (9/29)</a> · <a href="https://www.ynetnews.com/business/article/ryo7d5k5gg" target="_blank" rel="noopener">ynet (9/29 19:58 UTC)</a> · <a href="https://maritime-executive.com/article/report-israel-ends-zim-deal-review-telling-hapag-lloyd-to-restart-process" target="_blank" rel="noopener">Maritime Executive (9/29 15:56)</a> · <a href="https://www.timesofisrael.com/liveblog_entry/finance-ministry-objects-to-proposed-sale-of-israels-zim-shipping-company-to-german-line-hapag-lloyd/" target="_blank" rel="noopener">Times of Israel (배경, 9/28)</a></dd>
+    </dl>
+  </article>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">선사 · 운임 공지</span>
+      <h3>MSC, 극동발 북유럽 FAK 40ft USD 4,500 공지(10/19~31, 한국 포함)</h3>
+      <span class="time">9/30 (수) 04:00 Container News 보도</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul><li><b>9/30 04:00</b> Container News: MSC가 10/19~31 적용 극동발 유럽향 FAK(품목 무관 단일 운임)를 공지했다고 보도함. 출발지는 일본·한국·동남아를 포함한 극동 전 항만임 <span class="tag t-rep">보도 기준</span>.</li><li>북유럽 20ft USD 3,150·40ft USD 4,500, 서지중해 USD 3,750·4,500, 동지중해 USD 3,800·4,800, 흑해 USD 3,900·5,000이며, 10월 연료 할증(Global Fuel Surcharge) TEU당 USD 253 등이 포함됨.</li></ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain"><li class="ok">MSC 10/19~31 FAK 공지(Container News 보도)<span class="st">확인</span></li><li class="open">직전 FAK 대비 변화 폭<span class="st">미확인</span></li><li class="open">다른 선사의 아시아–유럽 운임 공지<span class="st">미확인</span></li></ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>MSC 아시아–유럽 운임의 10월 하순 수준은 정해졌으나 인상·인하 방향은 판단할 수 없는 상태임: 직전 FAK 대비 변화 폭이 확인되지 않음.</dd>
+      <dt>다음 확인</dt>
+      <dd>직전 MSC FAK, 다른 선사의 아시아–유럽 11월 운임 공지</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://container-news.com/msc-announces-new-far-east-to-europe-fak-rates/" target="_blank" rel="noopener">Container News (9/29 19:00 UTC)</a></dd>
+    </dl>
+  </article>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">선사 · 할증료</span>
+      <h3>MSC, 유럽발 UAE·어퍼걸프향 RCR 할증료 신설(드라이 USD 1,000, 10/1 부킹분부터)</h3>
+      <span class="time">9/29 (화) 23:00 Container News 보도</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul><li><b>9/29 23:00</b> Container News: MSC가 유럽발 UAE·어퍼걸프(Upper Gulf)향 화물에 RCR(Regional Cost Recovery, 지역 비용 회수) 할증료를 신설한다고 보도함 <span class="tag t-rep">보도 기준</span>.</li><li>금액은 드라이 20·40ft 컨테이너당 USD 1,000, 냉동 USD 2,000이며 10/1 부킹일 기준으로 별도 공지 전까지 적용됨. MSC는 사유로 "sustained demand growth on the trade"를 들었음.</li></ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain"><li class="ok">MSC RCR 할증료 10/1 부킹분 적용(Container News 보도)<span class="st">확인</span></li><li class="open">MSC 고객 공지 원문<span class="st">미확인</span></li><li class="open">유럽→중동(걸프)향 컨테이너당 비용 상승<span class="st">미확인</span></li><li class="open">다른 선사의 같은 항로 할증 조정<span class="st">미확인</span></li></ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>유럽→중동(걸프)향 MSC 화물의 컨테이너당 비용 증가는 종료 시점이 정해지지 않은 상태임: 할증료가 별도 공지 전까지 적용됨(보도).</dd>
+      <dt>다음 확인</dt>
+      <dd>MSC 고객 공지 원문, 다른 선사의 유럽→중동(걸프)향 할증료 공지</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://container-news.com/msc-introduces-surcharge-from-europe-to-middle-east/" target="_blank" rel="noopener">Container News (9/29 14:00 UTC)</a></dd>
+    </dl>
+  </article>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">에너지 · 비용</span>
+      <h3>브렌트 11월물 배럴당 102.59달러 마감(2.6% 하락)</h3>
+      <span class="time">9/30 (수) 03:30 전후 뉴욕 정산(Reuters) · 05:05 Rigzone</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul><li>9/29(미국 현지) 브렌트 11월물은 배럴당 2.69달러(2.6%) 내린 102.59달러, WTI(서부텍사스산 원유)는 3.22달러(3.5%) 내린 89.38달러로 마감함(Reuters) <span class="tag t-rep">보도 기준</span>.</li><li>Reuters는 무역 소식통·선박 자료를 인용해 사우디가 동서 송유관 가동을 재개하고 홍해 얀부항의 유조선 선적을 재개했다고 전함. Rigzone은 송유관 용량의 약 절반이 복구됐다고 씀 <span class="tag t-rep">보도 기준</span>.</li><li><b>9/30 05:05</b> Rigzone: 브렌트 11월물은 9/30 만기이며, 거래가 더 많은 12월물은 1.7% 내린 96.16달러로 집계함.</li></ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain"><li class="ok">브렌트·WTI 하락 마감<span class="st">확인</span></li><li class="open">싱가포르 VLSFO 등 벙커유 가격<span class="st">미확인</span></li><li class="open">선사 BAF 조정<span class="st">미확인</span></li></ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>선사 연료비 부담의 방향은 아직 판단할 수 없는 상태임: 원유 가격은 내렸으나 벙커유 가격과 BAF(유류할증료) 반영은 확인되지 않음.</dd>
+      <dt>다음 확인</dt>
+      <dd>싱가포르 VLSFO(저유황 선박유) 산정가, 선사 10월 BAF 공지, 브렌트 12월물</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://finance.yahoo.com/energy/articles/oil-prices-rise-second-session-003313319.html" target="_blank" rel="noopener">Reuters via Yahoo Finance (9/29)</a> · <a href="https://www.rigzone.com/news/oil_slides_on_saudi_supply_relief-29-sep-2026-184732-article" target="_blank" rel="noopener">Rigzone (9/29 16:05 EDT)</a></dd>
+    </dl>
+  </article>
+</section>
+
+<section aria-labelledby="s-none">
+  <div class="sec-title"><h2 id="s-none">새로운 소식이 없던 분야</h2></div>
+  <div class="plain"><ul>
+    <li>호르무즈·중동: 아락치 이란 외무장관이 9/29 뉴욕을 떠나며 미국의 공식 회신을 기다린다고 밝힘(Al Jazeera). 해협 재개·봉쇄 해제 관련 새 결정은 없음</li>
+    <li>통상·관세: USTR(미 무역대표부) 미·중 관세 우대 세율·발효일, 무역법 301조 입항 수수료 유예 연장 관보 공고 없음. 미국 의약품 관세 확대 적용(9/29, 연합뉴스)과 캐나다산 약 10억 달러 수입 금지 발효(Al Jazeera)는 컨테이너 물동량 연결이 확인되지 않음</li>
+    <li>수요·거시: 컨퍼런스보드 9월 미국 소비자신뢰지수 81.9(8월 88.6, 9/29 23:00 발표) 외에 컨테이너 물동량과 직접 이어지는 신규 지표 없음</li>
+    <li>해운 규제: FMC(미 연방해사위원회)·IMO(국제해사기구)·EU ETS(배출권거래제) 신규 발표 확인 안 됨</li>
+    <li>선사 네트워크: 얼라이언스 개편, 새 수에즈 경유 복귀 공지, 대형 발주 확인 안 됨. 파나마 운하 신규 어드바이저리 없음</li>
+    <li>대형 해난(컨테이너선), 사이버 공격·시스템 장애, 전쟁보험료 신규 수치: 확인 안 됨</li>
+  </ul></div>
+</section>
+
+<section aria-labelledby="s-sched">
+  <div class="sec-title"><h2 id="s-sched">이번 주 일정</h2></div>
+  <div class="plain">
+    <dl class="sched">
+      <dt>10/1 (목)</dt><dd>Maersk 항만보안료(Port Security) 부과 시작. 미국·캐나다발 수출 화물에만 적용 (컨테이너당 미국발 USD 15, 캐나다발 USD 12. 미국은 반입일, 캐나다는 출항 예정일 기준) · <a href="https://www.maersk.com/news/articles/2026/08/17/port-security-surcharge-us-canada-exports-october" target="_blank" rel="noopener">Maersk 공지</a></dd>
+      <dt>10/1 (목)</dt><dd>MSC 유럽발 중동(UAE·어퍼걸프)향 RCR 할증료 적용(부킹일 기준) · <a href="https://container-news.com/msc-introduces-surcharge-from-europe-to-middle-east/" target="_blank" rel="noopener">Container News</a> <span class="tag t-rep">보도 기준</span></dd>
+      <dt>10/1 (목)</dt><dd>ver.di(독일 통합서비스노조) 독일 항만 임금협상: 사측 9/10 개선안에 대한 조합원 설문 마감 · <a href="https://www.verdi.de/oeffentliche-private-dienste/mein-arbeitsplatz/maritime-wirtschaft/lohnrunde-seehaefen-2026" target="_blank" rel="noopener">ver.di</a></dd>
+      <dt>10/1 (목)</dt><dd>태풍 26호 수리개, 열대폭풍으로 약해져 10/1 06:00(일본 시각) 이즈 제도 부근 해상을 지나고 10/2 온대저기압으로 바뀔 전망 (일본 기상청 9/30 06:45 발표) · <a href="https://www.jma.go.jp/bosai/map.html#contents=typhoon" target="_blank" rel="noopener">일본 기상청</a></dd>
+    </dl>
+  </div>
+</section>
+
+<section aria-labelledby="s-legend">
+  <div class="sec-title"><h2 id="s-legend">읽는 법</h2></div>
+  <div class="legend">
+    <span><span class="tag t-ok">확인</span>이미 실행됐거나 일정·수치로 확정된 사실에 근거한 판단</span>
+    <span><span class="tag t-ev">근거</span>인용할 수 있는 발언, 지표, 기관 분석에 근거한 판단</span>
+    <span><span class="tag t-hold">주시</span>영향 경로는 확인됐으나 크기·방향을 가를 사건이 남음. 관전 포인트는 "다음 확인"에 적음</span>
+    <span><span class="tag t-rep">보도 기준</span>공식 원문을 확인하지 못해 언론 보도에 의존하는 정보</span>
+    <span>영향 경로: ● 확인된 단계 · ○ 아직 확인되지 않은 단계</span>
+    <span>배경: 대상 기간 이전의 정보. 해석을 돕기 위해서만 적음</span>
+  </div>
+</section>
+</div>
+</body></html>

@@ -1,0 +1,233 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MI Daily Brief</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#13222C; --ink-2:#4A5A66; --ink-3:#7A8894;
+  --line:#D9E0E5; --accent:#1B5C85; --accent-soft:#E3EEF5;
+  --up:#B42318; --down:#1D6FB8; --flat:#5E6B75;
+  --tag-ok-bg:#E4F2EA; --tag-ok:#1E6B45;
+  --tag-ev-bg:#E6EEF8; --tag-ev:#1D4F8A;
+  --tag-hold-bg:#F1EFEA; --tag-hold:#6B5D3F;
+  --warn-bg:#FFF4E5; --warn:#8A4B08;
+  --kakao:#FEE500; --kakao-ink:#191600;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+    --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+    --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+    --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+    --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+    --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+    --warn-bg:#2E2213; --warn:#F0B56A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+  --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+  --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+  --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+  --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+  --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+  --warn-bg:#2E2213; --warn:#F0B56A;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 56px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.head{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:18px}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;letter-spacing:.06em;color:var(--ink-2);font-weight:500}
+.sample{background:var(--warn-bg);color:var(--warn);padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.02em}
+h1{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font-size:13px;color:var(--ink-2)}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:14px}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sec-title h2{font-size:17px;font-weight:700}
+.sec-title span{font-size:12px;color:var(--ink-3)}
+
+/* kakao */
+.kakao{display:flex;flex-direction:column;gap:8px}
+.bubble{background:var(--kakao);color:var(--kakao-ink);border-radius:4px 14px 14px 14px;padding:12px 14px;max-width:340px;font-size:13.5px;line-height:1.6;white-space:pre-line}
+.bubble b{font-weight:700}
+.note{font-size:12.5px;color:var(--ink-3)}
+
+/* table */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;background:var(--accent-soft)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+.idx-note{font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:13.5px}
+.alert b{font-weight:700}
+
+/* items */
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.item-head{display:flex;flex-direction:column;gap:6px}
+.cat{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+.item h3{font-size:16.5px;font-weight:700}
+.rows{display:grid;grid-template-columns:88px 1fr;gap:10px 14px;margin:0}
+.rows dt{font-size:12.5px;font-weight:600;color:var(--ink-3);padding-top:2px}
+.rows dd{margin:0;font-size:14.5px}
+.rows ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.src{font-size:13px;color:var(--ink-2)}
+.src a{word-break:break-word}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:3px;margin-right:6px;letter-spacing:.02em;vertical-align:1px}
+.t-ok{background:var(--tag-ok-bg);color:var(--tag-ok)}
+.t-ev{background:var(--tag-ev-bg);color:var(--tag-ev)}
+.t-hold{background:var(--tag-hold-bg);color:var(--tag-hold)}
+.t-single{background:var(--warn-bg);color:var(--warn)}
+.t-rep{background:var(--line);color:var(--ink-2)}
+
+/* watch / schedule / excluded */
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.plain ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sched{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin:0}
+.sched dt{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500;white-space:nowrap}
+.sched dd{margin:0}
+.excl li{color:var(--ink-2)}
+.excl b{color:var(--ink)}
+
+.legend{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
+.sources ol{margin:0;padding-left:20px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+.sources a{word-break:break-all}
+
+@media (max-width:520px){
+  h1{font-size:23px}
+  .rows{grid-template-columns:1fr;gap:2px}
+  .rows dd{margin-bottom:8px}
+}
+/* transmission chain */
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.chain li{position:relative;padding:0 0 10px 22px;font-size:14px}
+.chain li::before{content:"";position:absolute;left:5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.chain li::after{content:"";position:absolute;left:8.5px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+.chain li:last-child{padding-bottom:0}
+.chain li:last-child::after{display:none}
+.chain li.ok::before{background:var(--tag-ok)}
+.chain li.open::before{background:transparent;border:1.5px solid var(--ink-3)}
+.chain .st{font-size:11.5px;font-weight:600;margin-left:6px;color:var(--ink-3)}
+.chain li.ok .st{color:var(--tag-ok)}
+.time{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.summary ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px}
+.summary li{color:var(--ink-2);font-size:14px}
+.summary li b{display:block;color:var(--ink);font-size:15px;margin-bottom:3px}
+.baseline{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:4px;padding:8px 12px}
+</style>
+</head><body>
+<div class="wrap">
+<header class="head">
+  <div class="eyebrow"><span>LX판토스 해운MI팀 · MI Daily Brief</span></div>
+  <h1>MI Daily Brief · 10/4 (일)</h1>
+  <dl class="meta">
+    <dt>대상 기간</dt><dd class="num">10/3 (토) 07:00 ~ 10/4 (일) 07:00 (24시간)</dd>
+    <dt>반영 시점</dt><dd>10/4 (일) 07:00까지 발표·보도된 소식 반영</dd>
+    <dt>시각 기준</dt><dd>한국시간(KST). 발언 시각이 확인되지 않은 해외 일정은 현지 날짜를 병기</dd>
+  </dl>
+</header>
+
+<section aria-labelledby="s-sum">
+  <div class="sec-title"><h2 id="s-sum">한눈에 보기</h2></div>
+  <div class="summary"><ol>
+    <li><b>바브엘만데브 장악한 후티의 근거지 사나 공습, 후티는 사우디 전투기 26회 주장</b> AFP 현지 기자가 전투기의 미사일 발사를 목격했고 사우디 당국은 언급하지 않았으며, 같은 날 리야드 남쪽 아람코 정유시설 화재도 확인됨(원인 미발표).</li>
+  </ol></div>
+</section>
+
+<section aria-labelledby="s-items">
+  <div class="sec-title"><h2 id="s-items">주요 업데이트</h2><span>1건</span></div>
+
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">지정학 · 홍해</span>
+      <h3>바브엘만데브 장악한 후티의 근거지 사나 공습, 후티는 사우디 전투기 26회 주장</h3>
+      <span class="time">10/3 (토) 22:28 AFP 보도 외</span>
+    </div>
+    <dl class="rows">
+      <dt>경과</dt>
+      <dd><ul>
+        <li><b>10/3 21:57</b> 예멘 수도 사나에서 폭발음이 최소 5차례 이어짐(AFP 현지 기자) <span class="tag t-rep">보도 기준</span>. 다른 AFP 기자는 전투기 2대의 미사일 발사를 목격함. 후티 측은 사우디군의 공습이라고 밝힘.</li>
+        <li><b>10/3 22:28</b> 리야드 남쪽 아람코 시설에서 화염과 연기가 오름(AFP 현지 기자) <span class="tag t-rep">보도 기준</span>. 화재 원인은 밝혀지지 않음.</li>
+        <li><b>10/4 02:14</b> 후티 매체 Al-Masirah, 사우디 전투기가 사나를 26회 공습했다고 보도함 <span class="tag t-rep">보도 기준</span>. 사우디 당국은 언급하지 않음.</li>
+        <li><b>10/4 02:14</b> 화재가 난 곳은 아람코 리야드 정유공장이며, 소방대가 진화에 나섬(AFP 현지 기자).</li>
+      </ul></dd>
+      <dt>영향 경로</dt>
+      <dd><ol class="chain">
+        <li class="ok">후티, 바브엘만데브 해협 연안과 마윤섬 장악(9/11, 배경)<span class="st">확인</span></li>
+        <li class="ok">사나 공습(AFP 기자 전투기 목격)<span class="st">확인</span></li>
+        <li class="open">공습 주체 사우디·26회(후티 측 주장, 사우디 침묵)<span class="st">미확인</span></li>
+        <li class="ok">리야드 아람코 정유공장 화재(AFP 현지 확인)<span class="st">확인</span></li>
+        <li class="open">화재 원인(사우디 당국 미발표)<span class="st">미확인</span></li>
+        <li class="ok">Gemini 수에즈 경유 복귀 서비스, Maersk 계획 변경 공지 없음(다른 선사 미확인)<span class="st">확인</span></li>
+        <li class="open">후티의 상선 경고, 홍해 전쟁보험료 변화<span class="st">미확인</span></li>
+      </ol></dd>
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>Maersk의 Gemini 아시아–북유럽·지중해 수에즈 경유 서비스는 바브엘만데브를 장악한 후티의 근거지가 공습받는 중에도 그대로임: 후티가 사우디 소행이라 주장한 사나 공습이 10/1에 이어 다시 보도됐으나 Maersk의 수에즈 계획 변경 공지는 없음.</dd>
+      <dt>배경</dt>
+      <dd class="baseline"><ul>
+        <li><b>9/11</b> 후티, 바브엘만데브 해협 연안과 마윤섬 장악을 마침(AFP).</li>
+        <li><b>9/14</b> Maersk·Hapag-Lloyd(Gemini), 아시아–북유럽·지중해 AE5·AE11·AE12와 인도–유럽 ME2를 수에즈 경유로 바꾼다고 발표함(9/19부터 순차).</li>
+        <li><b>10/1</b> 후티, 사우디가 10/1 밤(현지) 사나를 공습했다고 주장함. 7월 교전 재개 뒤 첫 공습이라고 밝힘. 같은 날 Reuters는 사우디가 바브엘만데브 탈환 공세를 준비 중이라고 보도함(10/3 01:22 KST).</li>
+      </ul></dd>
+      <dt>다음 확인</dt>
+      <dd>사나 공습·리야드 정유공장 화재에 대한 사우디 정부의 공식 입장, 사우디 지상 공세 개시 여부, 후티의 상선 경고, 선사의 수에즈 서비스 공지, 홍해 전쟁보험료</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/" target="_blank" rel="noopener">CBS News 라이브(AFP 인용, 10/3 08:57·09:28 EDT)</a> · <a href="https://www.timesofisrael.com/houthis-say-saudi-arabia-launched-dozens-of-strikes-on-yemen-capital/" target="_blank" rel="noopener">Times of Israel/AFP (10/3 20:14 이스라엘 시각)</a> · <a href="https://www.maersk.com/en/news" target="_blank" rel="noopener">Maersk 고객 공지(10/4 07:00 기준)</a> · <a href="https://www.al-monitor.com/originals/2026/09/yemens-houthis-complete-takeover-bab-al-mandab-area-govt-official-afp" target="_blank" rel="noopener">Al-Monitor/AFP (배경, 9/11)</a> · <a href="https://www.maersk.com/news/articles/2026/09/14/structural-changes-ae5-ae11-ae12-me2-gemini-services" target="_blank" rel="noopener">Maersk (배경, 9/14)</a> · <a href="https://www.ynetnews.com/article/bjxod8tcfe" target="_blank" rel="noopener">ynet/Reuters (배경, 10/2 16:22 UTC)</a></dd>
+    </dl>
+  </article>
+</section>
+
+<section aria-labelledby="s-none">
+  <div class="sec-title"><h2 id="s-none">그 밖의 확인 사항</h2></div>
+  <div class="plain"><ul>
+    <li><b>호르무즈·중동</b>: 해협 재개·봉쇄 해제에 관한 새 결정은 없음. 이란의 회신 판단도 공개되지 않음.</li>
+    <li><b>흑해</b>: 우크라이나 항만청은 러시아가 오데사주 항만에 있던 라이베리아 선적 화물선을 공격했다고 밝힘. 1명이 숨지고 3명이 다침(<a href="https://gcaptain.com/russia-hits-liberian-flagged-ship-in-ukraines-odesa-port-kills-one/" target="_blank" rel="noopener">gCaptain/Reuters</a> 보도, 10/4 02:25).</li>
+    <li><b>통상·관세</b>: 9월 말 발표된 미·중 무역휴전 연장(2027-01-10까지)의 미국 측 관보 공고는 아직 없음. 무역법 301조 입항 수수료 유예(11/9 만료)의 연장 공고도 없음(<a href="https://www.federalregister.gov/" target="_blank" rel="noopener">연방 관보</a>·USTR 10/3 기준).</li>
+    <li><b>선사·M&amp;A</b>: Hapag-Lloyd의 ZIM 인수와 관련한 ZIM의 새 SEC 공시(6-K)는 없음. 가장 최근 공시는 9/30 공시임(<a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0001654126&amp;type=6-K" target="_blank" rel="noopener">SEC EDGAR</a>).</li>
+    <li><b>항만 노사</b>: 독일 항만 노조 ver.di가 사측안을 두고 벌인 조합원 설문(10/1 마감)의 결과는 아직 발표되지 않음(<a href="https://www.verdi.de/oeffentliche-private-dienste/mein-arbeitsplatz/maritime-wirtschaft/lohnrunde-seehaefen-2026" target="_blank" rel="noopener">ver.di</a>).</li>
+    <li><b>재해·기상</b>: 태풍 27호 초이완, 10/5 오가사와라 근해에서 925hPa까지 발달할 전망임. 10/7 일본 동쪽 해상으로 나아갈 예보임. 10/8 쿠릴 열도 동쪽에서 온대저기압으로 바뀔 예보임. 한국·중국 항만 접근 예보는 없음(<a href="https://www.jma.go.jp/bosai/typhoon/data/TC2633/specifications.json" target="_blank" rel="noopener">일본 기상청</a> 10/4 06:45 발표).</li>
+    <li><b>새 소식이 없던 분야</b>: 파나마 운하(최신 공지 9/28 그대로), 대형 해난(컨테이너선), 수요·제조업 지표(주말·중국 국경절 연휴)</li>
+  </ul></div>
+</section>
+
+<section aria-labelledby="s-sched">
+  <div class="sec-title"><h2 id="s-sched">이번 주 일정</h2></div>
+  <div class="plain">
+    <dl class="sched">
+      <dt>-</dt><dd>최신 공지로 확인된 이번 주 주요 일정 없음</dd>
+    </dl>
+  </div>
+</section>
+
+<section aria-labelledby="s-legend">
+  <div class="sec-title"><h2 id="s-legend">읽는 법</h2></div>
+  <div class="legend">
+    <span><span class="tag t-hold">주시</span>영향 경로는 확인됐으나 크기·방향을 가를 사건이 남음. 관전 포인트는 "다음 확인"에 적음</span>
+    <span><span class="tag t-rep">보도 기준</span>공식 원문을 확인하지 못해 언론 보도에 의존하는 정보</span>
+    <span>영향 경로: ● 확인된 단계 · ○ 아직 확인되지 않은 단계</span>
+    <span>그 밖의 확인 사항: 진행 중 사안의 경과와 참고할 소식, 새 소식이 없던 분야</span>
+    <span>배경: 대상 기간 이전의 정보. 해석을 돕기 위해서만 적음</span>
+  </div>
+</section>
+</div>
+</body></html>

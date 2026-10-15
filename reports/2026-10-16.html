@@ -1,0 +1,214 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MI Daily Brief</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#13222C; --ink-2:#4A5A66; --ink-3:#7A8894;
+  --line:#D9E0E5; --accent:#1B5C85; --accent-soft:#E3EEF5;
+  --up:#B42318; --down:#1D6FB8; --flat:#5E6B75;
+  --tag-ok-bg:#E4F2EA; --tag-ok:#1E6B45;
+  --tag-ev-bg:#E6EEF8; --tag-ev:#1D4F8A;
+  --tag-hold-bg:#F1EFEA; --tag-hold:#6B5D3F;
+  --warn-bg:#FFF4E5; --warn:#8A4B08;
+  --kakao:#FEE500; --kakao-ink:#191600;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+    --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+    --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+    --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+    --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+    --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+    --warn-bg:#2E2213; --warn:#F0B56A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E171D; --surface:#15222B; --ink:#E4EBF0; --ink-2:#A9B7C1; --ink-3:#7D8C97;
+  --line:#26363F; --accent:#7DB8DE; --accent-soft:#18303F;
+  --up:#F2877C; --down:#79B3EA; --flat:#9AA8B2;
+  --tag-ok-bg:#153227; --tag-ok:#86D1A8;
+  --tag-ev-bg:#172C44; --tag-ev:#9CC2EE;
+  --tag-hold-bg:#2A261D; --tag-hold:#D2C29C;
+  --warn-bg:#2E2213; --warn:#F0B56A;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 56px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.head{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:18px}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;letter-spacing:.06em;color:var(--ink-2);font-weight:500}
+.sample{background:var(--warn-bg);color:var(--warn);padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.02em}
+h1{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font-size:13px;color:var(--ink-2)}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:14px}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sec-title h2{font-size:17px;font-weight:700}
+.sec-title span{font-size:12px;color:var(--ink-3)}
+
+/* kakao */
+.kakao{display:flex;flex-direction:column;gap:8px}
+.bubble{background:var(--kakao);color:var(--kakao-ink);border-radius:4px 14px 14px 14px;padding:12px 14px;max-width:340px;font-size:13.5px;line-height:1.6;white-space:pre-line}
+.bubble b{font-weight:700}
+.note{font-size:12.5px;color:var(--ink-3)}
+
+/* table */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.04em;background:var(--accent-soft)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+.idx-note{font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:13.5px}
+.alert b{font-weight:700}
+
+/* items */
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.item-head{display:flex;flex-direction:column;gap:6px}
+.cat{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+.item h3{font-size:16.5px;font-weight:700}
+.rows{display:grid;grid-template-columns:88px 1fr;gap:10px 14px;margin:0}
+.rows dt{font-size:12.5px;font-weight:600;color:var(--ink-3);padding-top:2px}
+.rows dd{margin:0;font-size:14.5px}
+.rows ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.src{font-size:13px;color:var(--ink-2)}
+.src a{word-break:break-word}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:3px;margin-right:6px;letter-spacing:.02em;vertical-align:1px}
+.t-ok{background:var(--tag-ok-bg);color:var(--tag-ok)}
+.t-ev{background:var(--tag-ev-bg);color:var(--tag-ev)}
+.t-hold{background:var(--tag-hold-bg);color:var(--tag-hold)}
+.t-single{background:var(--warn-bg);color:var(--warn)}
+.t-rep{background:var(--line);color:var(--ink-2)}
+
+/* watch / schedule / excluded */
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.plain ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sched{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin:0}
+.sched dt{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500;white-space:nowrap}
+.sched dd{margin:0}
+.excl li{color:var(--ink-2)}
+.excl b{color:var(--ink)}
+
+.legend{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
+.sources ol{margin:0;padding-left:20px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+.sources a{word-break:break-all}
+
+@media (max-width:520px){
+  h1{font-size:23px}
+  .rows{grid-template-columns:1fr;gap:2px}
+  .rows dd{margin-bottom:8px}
+}
+/* transmission chain */
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.chain li{position:relative;padding:0 0 10px 22px;font-size:14px}
+.chain li::before{content:"";position:absolute;left:5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.chain li::after{content:"";position:absolute;left:8.5px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+.chain li:last-child{padding-bottom:0}
+.chain li:last-child::after{display:none}
+.chain li.ok::before{background:var(--tag-ok)}
+.chain li.open::before{background:transparent;border:1.5px solid var(--ink-3)}
+.chain .st{font-size:11.5px;font-weight:600;margin-left:6px;color:var(--ink-3)}
+.chain li.ok .st{color:var(--tag-ok)}
+.time{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.summary ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px}
+.summary li{color:var(--ink-2);font-size:14px}
+.summary li b{display:block;color:var(--ink);font-size:15px;margin-bottom:3px}
+.baseline{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:4px;padding:8px 12px}
+</style>
+</head><body>
+<div class="wrap">
+<header class="head">
+  <div class="eyebrow"><span>LX판토스 해운MI팀 · MI Daily Brief</span></div>
+  <h1>MI Daily Brief · 10/16 (금)</h1>
+  <dl class="meta">
+    <dt>대상 기간</dt><dd class="num">10/15 (목) 07:00 ~ 10/16 (금) 07:00 (24시간)</dd>
+    <dt>반영 시점</dt><dd>10/16 (금) 07:00까지 발표·보도된 소식 반영</dd>
+    <dt>시각 기준</dt><dd>한국시간(KST). 발표 시각이 확인되지 않은 해외 발표는 현지 날짜를 병기</dd>
+  </dl>
+</header>
+<section aria-labelledby="s-sum">
+  <div class="sec-title"><h2 id="s-sum">한눈에 보기</h2></div>
+  <div class="summary"><ol>
+    <li><b>멕시코 정부, 아시아–멕시코 두 기항지 연안에 허리케인 감시(만사니요)·열대폭풍 경보(라사로카르데나스) 발령</b> 미 국립허리케인센터는 허리케인 트루디가 10/16(현지) 메이저 허리케인(3등급 이상)으로 발달한 뒤 10/17(현지) 두 항만이 있는 연안에 접근할 것으로 예보함.</li>
+  </ol></div>
+</section>
+<section aria-labelledby="s-items">
+  <div class="sec-title"><h2 id="s-items">주요 업데이트</h2><span>1건</span></div>
+  <article class="item">
+    <div class="item-head">
+      <span class="cat">재해·기상 · 아시아–멕시코(태평양) 항로</span>
+      <h3>멕시코 정부, 아시아–멕시코 두 기항지 연안에 허리케인 감시(만사니요)·열대폭풍 경보(라사로카르데나스) 발령</h3>
+      <span class="time">10/16 06:00 미 국립허리케인센터 예보문 10호</span>
+    </div>
+    <dl class="rows">
+      <dt>시사점</dt>
+      <dd><span class="tag t-hold">주시</span>아시아–멕시코 항로의 두 기항지는 10/17(현지)부터 열대폭풍 강풍권에 들 전망이며, 피해 규모는 트루디의 진로에 좌우되는 상태임: 미 국립허리케인센터는 중심이 해안 바로 앞 해상을 지난다고 예보하면서도, 진로가 예보보다 육지에 가까우면 상륙할 수 있다고 분석함.</dd>
+      <dt>경과</dt>
+      <dd><ul>
+        <li><b>10/16 06:00</b> 멕시코 정부는 만사니요항 연안(푼타산텔모 북쪽~플라야페룰라)에 허리케인 감시를 새로 발령함. 라사로카르데나스항 연안(푼타산텔모~시와타네호)에는 열대폭풍 경보를 새로 발령함(미 국립허리케인센터).</li>
+        <li><b>10/16 06:00</b> 트루디는 만사니요 남남동쪽 650km 해상에서 최대 풍속 150km/h로 북북서진 중임. 트루디는 10/16(현지) 메이저 허리케인(3등급 이상)으로 발달한 뒤 10/17(현지) 멕시코 남서부·중서부 연안에 접근할 것으로 예보됨(미 국립허리케인센터).</li>
+        <li><b>10/16 06:00</b> 열대폭풍 강풍은 경보 구간(라사로카르데나스)에 늦어도 10/17(현지) 이른 시각, 감시 구간(만사니요)에 10/17(현지) 중 도달할 것으로 예보됨. 미초아칸·콜리마·할리스코 연안에는 주말 동안 생명을 위협하는 홍수·산사태 가능성이 예보됨(미 국립허리케인센터).</li>
+      </ul></dd>
+      <dt>배경</dt>
+      <dd><ul>
+        <li>10/15 06:00 미 국립허리케인센터 예보문 6호 기준으로는 멕시코 연안에 감시·경보가 없었음.</li>
+      </ul></dd>
+      <dt>다음 확인</dt>
+      <dd>멕시코 해군부·항만청의 만사니요·라사로카르데나스 입출항 제한 여부, 터미널 운영 중단 공지, 트루디의 상륙 여부와 진로</dd>
+      <dt>출처</dt>
+      <dd class="src"><a href="https://www.nhc.noaa.gov/archive/2026/ep21/ep212026.public.010.shtml" target="_blank" rel="noopener">미 국립허리케인센터 예보문 10호 (10/16 06:00)</a> · <a href="https://www.nhc.noaa.gov/archive/2026/ep21/ep212026.discus.010.shtml" target="_blank" rel="noopener">미 국립허리케인센터 예보 해설 10호 (10/16 06:00)</a> · <a href="https://www.nhc.noaa.gov/archive/2026/ep21/ep212026.public.006.shtml" target="_blank" rel="noopener">예보문 6호 (10/15 06:00)</a></dd>
+    </dl>
+  </article>
+</section>
+<section aria-labelledby="s-none">
+  <div class="sec-title"><h2 id="s-none">그 밖의 확인 사항</h2></div>
+  <div class="plain"><ul>
+    <li><b>중동(걸프)향</b>: 미군 지원을 받은 호르무즈 해협 통항은 하루 약 30척(10/11~14)으로, 이란 전쟁 전인 2025년 하루 평균 통항(약 138척)의 약 22% 수준임. 연합해사정보센터(JMIC)는 10/15 권고에서 해협 위협 등급을 'SEVERE'로 유지함(<a href="https://gcaptain.com/by-the-numbers-u-s-claims-control-of-hormuz-as-ship-attacks-hit-new-high/" target="_blank" rel="noopener">gCaptain</a>, 10/16 03:33 게재) <span class="tag t-rep">보도 기준</span></li>
+    <li><b>중동(걸프)향</b>: 10/14 침몰한 컨테이너선 GFS Pride의 침몰 원인을 두고 미국과 이란의 주장이 엇갈림: 미 중부사령부는 이란 혁명수비대 발사체에 피격됐다고 발표하고, 기뢰 접촉이라는 혁명수비대의 주장을 부인함. JMIC도 기뢰가 원인이라는 증거는 없다고 판단함(<a href="https://gcaptain.com/by-the-numbers-u-s-claims-control-of-hormuz-as-ship-attacks-hit-new-high/" target="_blank" rel="noopener">gCaptain</a>, 10/16 03:33 게재) <span class="tag t-rep">보도 기준</span></li>
+    <li><b>미국 수요</b>: 미국 9월 소매판매 증가는 대부분 주유소 매출 증가에 따른 것임: 소매판매는 전월 대비 0.8% 늘었으나, 주유소(+6.4%)를 제외하면 0.2% 증가에 그침. 8월 소매판매 증가율은 1.1%에서 1.3%로 상향 수정됨(물가 변동을 빼지 않은 금액 기준, <a href="https://www.census.gov/retail/marts/www/marts_current.pdf" target="_blank" rel="noopener">미 인구조사국</a>, 10/15 21:30 발표).</li>
+    <li><b>미국 물가</b>: 미국 9월 생산자물가(최종 수요)는 전월 대비 1.3% 올라 8월(+0.5%)보다 상승 폭이 커졌고, 전년 대비로는 6.3% 상승함. 최종 수요 에너지 가격은 전월 대비 10.8% 올랐음(<a href="https://www.bls.gov/news.release/ppi.nr0.htm" target="_blank" rel="noopener">미 노동통계국</a>, 10/15 21:30 발표).</li>
+    <li><b>선박 연료(벙커유)</b>: 중국 저우산의 선박 연료 공급난이 지속 중임: 여러 공급사가 재고 부족을 보고함. 급유 리드타임(급유받으려면 미리 주문해야 하는 기간)은 유종과 관계없이 약 11일로 전날과 같음(<a href="https://www.engine.online/news/east-of-suez-market-update-15-oct-82c5" target="_blank" rel="noopener">ENGINE</a>, 10/15 18:00 기준).</li>
+    <li><b>새 소식이 없던 분야</b>: 미국이 중국 관련 선박에 부과하는 입항 수수료(무역법 301조)의 유예 기한은 현행 공고상 11/9로 변화 없음. 중국 상무부 발표에 따르면 이 유예는 미·중 무역휴전 합의의 일부임. 중국 상무부가 9/28 발표한 휴전 연장 합의를 시행하는 미국 공고는 아직 없음(<a href="https://www.federalregister.gov/public-inspection/current" target="_blank" rel="noopener">미 연방 관보 게재 예정 목록</a>).</li>
+    <li><b>새 소식이 없던 분야</b>: 파나마운하의 흘수(선박이 잠기는 깊이) 제한·통항 조건 관련 새 공지 없음(<a href="https://pancanal.com/en/maritime-services/advisory-to-shipping/" target="_blank" rel="noopener">운하청 공지 목록</a>).</li>
+  </ul></div>
+</section>
+<section aria-labelledby="s-sched">
+  <div class="sec-title"><h2 id="s-sched">이번 주 일정</h2></div>
+  <div class="plain">
+    <dl class="sched">
+      <dt>10/17 (토)</dt><dd>Maersk·Hapag-Lloyd 공동 아시아–중동(걸프) 서비스 FM1(3/27 중단) 재개 첫 항차 칭다오 출항 예정 (<a href="https://www.maersk.com/news/articles/2026/10/13/fm1-service-relaunch-gemini-network-asia-middle-east" target="_blank" rel="noopener">Maersk 고객 공지</a>)</dd>
+    </dl>
+  </div>
+</section>
+<section aria-labelledby="s-legend">
+  <div class="sec-title"><h2 id="s-legend">읽는 법</h2></div>
+  <div class="legend">
+    <span><span class="tag t-hold">주시</span>우리 항로·비용에 닿는 것은 확인됐으나 크기·방향을 가를 사건이 남음</span>
+    <span><span class="tag t-rep">보도 기준</span>공식 원문을 확인하지 못해 언론 보도에 의존하는 정보</span>
+    <span>그 밖의 확인 사항: 진행 중 사안의 경과와 참고할 소식, 새 소식이 없던 분야</span>
+    <span>배경: 대상 기간 이전의 정보. 해석을 돕기 위해서만 적음</span>
+  </div>
+</section>
+</div>
+</body>
+</html>
